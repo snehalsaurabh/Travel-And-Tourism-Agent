@@ -1,0 +1,62 @@
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+.ENV/
+
+# Python environment files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.env
+*.dotenv
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# MacOS
+.DS_Store
+
+# Linux
+*.swp
+*.swo
+
+# IDEs
+.vscode/
+.idea/
+
+# Log files
+*.log
+
+# Dependency directories
+node_modules/
+dist/
+build/
+*.egg-info/
+pip-wheel-metadata/
+
+# TensorBoard log directories
+logs/
+logdir/
+
+# Pytest cache
+.cache/
+
+# Config and environment files
+.env
+*.env
+*.dotenv
+config.yaml
+config.json
+
+# Docker-related files
+*.pid
+*.log
+docker-compose.override.yml
+
+# Other artifacts
+*.weights
+*.ckpt
+*.pth
