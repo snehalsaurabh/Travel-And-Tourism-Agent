@@ -1,0 +1,10 @@
+streamlit
+googlemaps
+requests
+Pillow
+langchain
+openai
+python-dotenv
+langchain_community
+streamlit_folium
+wikipedia
