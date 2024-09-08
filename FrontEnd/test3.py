@@ -9,11 +9,17 @@ from streamlit_folium import st_folium
 from langchain.prompts import PromptTemplate
 from langchain.llms import OpenAI
 from langchain.chains import LLMChain
-from langchain.utilities import WikipediaAPIWrapper
+from langchain_community.utilities import WikipediaAPIWrapper
+from langchain_community.llms import OpenAI
 import openai
+from dotenv import load_dotenv
+import os
 
-GOOGLE_API_KEY = ''
-OPENAI_API_KEY = ''
+# Load environment variables from .env file
+load_dotenv()
+
+GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 gmaps = googlemaps.Client(key=GOOGLE_API_KEY)
 
@@ -25,14 +31,12 @@ animated_text("AI Travel Agent")
 llm = OpenAI(temperature=0.7, openai_api_key=OPENAI_API_KEY)
 wiki = WikipediaAPIWrapper()
 
-
 # Function to convert image to base64 format
 def image_to_base64(image):
     buffered = BytesIO()
     image.save(buffered, format="PNG")
     img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
     return img_str
-
 
 # Function to fetch place images from Google Places API
 def fetch_place_image(photo_reference):
@@ -42,18 +46,15 @@ def fetch_place_image(photo_reference):
         return Image.open(BytesIO(response.content))
     return None
 
-
 # Function to get top places using Google Places API
 def fetch_places(city):
     places_result = gmaps.places(query=f"Top places to visit in {city}")
     return places_result.get("results", [])
 
-
 # Function to fetch Wikipedia details of a place
 def get_wikipedia_details(place_name):
     result = wiki.run(place_name)
     return result
-
 
 # Function to get ticket prices using GPT-3.5 Turbo
 def get_ticket_price_from_gpt(place_name, description):
@@ -78,7 +79,6 @@ def get_ticket_price_from_gpt(place_name, description):
     )
 
     return response.choices[0].message['content'].strip()
-
 
 # Custom CSS for card flip effect and animated title
 st.markdown("""
@@ -195,8 +195,7 @@ if city:
     places = fetch_places(city)
 
     if places:
-        first_place_lat, first_place_lng = places[0]['geometry']['location']['lat'], places[0]['geometry']['location'][
-            'lng']
+        first_place_lat, first_place_lng = places[0]['geometry']['location']['lat'], places[0]['geometry']['location']['lng']
 
         # Folium map
         m = folium.Map(location=[first_place_lat, first_place_lng], zoom_start=12)

@@ -8,3 +8,5 @@ python-dotenv
 langchain_community
 streamlit_folium
 wikipedia
+crewai
+crewai_tools
