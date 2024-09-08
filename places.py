@@ -7,9 +7,8 @@ from langchain.llms import OpenAI
 from langchain.prompts import PromptTemplate
 
 # Google Places and OpenAI API keys
-GOOGLE_API_KEY = ''
-OPENAI_API_KEY = ''
-
+#GOOGLE_API_KEY = ''
+#OPENAI_API_KEY = ''
 # Set up Google Maps client
 gmaps = googlemaps.Client(key=GOOGLE_API_KEY)
 
@@ -36,7 +35,7 @@ def fetch_places(city):
 # Function to fetch place image from Google Places API
 def fetch_place_image(photo_reference):
     # Correctly build the photo URL using the Google Places API photo_reference
-    #url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={photo_reference}&key={GOOGLE_API_KEY}"
+    url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={photo_reference}&key={GOOGLE_API_KEY}"
 
     # Make a request to fetch the image
     response = requests.get(url)
@@ -51,7 +50,7 @@ def fetch_place_image(photo_reference):
 # Function to fetch static map image using Maps Static API as fallback
 def fetch_static_map(place_name):
     # Use Google Maps Static API to get a static map of the location
-    #static_map_url = f"https://maps.googleapis.com/maps/api/staticmap?center={place_name}&zoom=14&size=400x400&key={GOOGLE_API_KEY}"
+    static_map_url = f"https://maps.googleapis.com/maps/api/staticmap?center={place_name}&zoom=14&size=400x400&key={GOOGLE_API_KEY}"
 
     # Request the map image
     response = requests.get(static_map_url)
